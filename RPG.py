@@ -142,13 +142,13 @@ def printDeath():
 
 def wait():
     print '.',
-    time.sleep(0.5)
+    time.sleep(0.6)
     print '.',
-    time.sleep(0.5)
+    time.sleep(0.6)
     print '.',
-    time.sleep(0.5)
+    time.sleep(0.6)
     print '.',
-    time.sleep(0.5)
+    time.sleep(0.6)
     print '.\n'
 
 def attack(attacker, defender):
