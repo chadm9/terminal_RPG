@@ -216,9 +216,11 @@ def main():
                     print "%s has %s health remaining." % (monster.name, monster.health)
                     if monster.health <= 0:
                         print "You have defeated the %s!" % monster.name
-                        hero.xp += monster.xp_value
-                        print "You experience has increased to %s" % (hero.xp)
+                        hero.health += 2
+			hero.power += 1 
+                        print "You power has increased to %s and your health to %s" % (hero.power, hero.health)
                         del monsters[monsters.index(monster)]
+                        wait()
 
                 elif user_input == "3" and mushroom == True:
                     print 'Eating Mushroom...'
@@ -238,13 +240,18 @@ def main():
                 else:
                     print "Invalid input %s" % user_input
 
-                if monster.health > 0:
+                if monster.health > 0 and random.randint(0,1):
                     print "%s attacking..." % (monster.name)
+                    wait()
                     hero.health -= attack(monster, hero)
                     if not hero.isAlive():
                         print "                        Y O U  A R E  D E A D"
                         printDeath()
                         exit()
+                else:
+                    wait()
+		    print "%s ran away" % (monster.name)
+		    break
 
                 if hero.isAlive() and hero.health < 5:
                     print "You have gone into a rage.  Your power has increased!"
