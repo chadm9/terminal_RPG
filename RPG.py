@@ -1,4 +1,6 @@
 from Hero import Hero
+from Demigod import Demigod
+from Wizard import Wizard
 from Vampire import Vampire
 from Dragon import Dragon
 from Goblin import Goblin
@@ -52,7 +54,19 @@ def startGame():
          `\<> |  | <>/'         |'|
            `-.|  |.-`           \ /
               '--'               ^"""
-    return Hero(raw_input("What is thy name brave hero?\n> "))
+    name = raw_input("What is thy name brave wanderer?\n> ")
+    selection = raw_input("""What art though?
+1. A Hero
+2. A Wizard
+3. A Demigod
+> """)
+    if selection == "1":
+        return Hero(name)
+    elif selection == "2":
+        return Wizard(name)
+    else:
+        return Demigod(name)
+    
 
 def printVictory():
     print """\n\n
@@ -151,6 +165,24 @@ def wait():
     time.sleep(0.6)
     print '.\n'
 
+def cast_spell(monster):
+    spell = random.randint(0,3)
+    if spell == 0:
+        print "You cast a spell of weakening, your enemies power has decreased by 5."
+        monster.power -= 5
+        print "%s's power is now %d" % (monster.name, monster.power)
+    elif spell == 1:
+        print "You cast an attack spell, your enemy's health has decreased by 4."
+        monster.health -= 4
+        print "%s's health is now %d" % (monster.name, monster.health)
+    elif spell == 2:
+        print "You have woven a powerful magic, your enemy's health and power decreased by 5."
+        monster.power -= 5
+        monster.health -= 5
+        print "%s's power is now %s and its health is now %s." % (monster.name, monster.power, monster.health)
+    elif spell == 3:
+        print "Your enemy resisted your magical attack."
+
 def attack(attacker, defender):
     if attacker.can_miss:
         bound = 0
@@ -180,7 +212,9 @@ def main():
             print "You have %d health and %d power." % (hero.health, hero.power)
             print "The %s has %d health and %d power.\n" % (monster.name, monster.health, monster.power)
             monster.display()
-
+        #    if hero.magic_user == True:
+        #        if raw_input("Cast a spell? (y/n)\n> ") == 'y':
+        #            cast_spell(monster)
 
             while monster.isAlive() and hero.isAlive():
 
@@ -206,10 +240,25 @@ def main():
                 else:
                     print "%s is first to act" % (hero.name)
 
+                if hero.magic_user == True:
+                    if raw_input("Cast a spell? (y/n)\n> ") == 'y':
+                        wait()
+                        cast_spell(monster)
+                        if monster.health <= 0:
+                            print "You have defeated the %s!" % monster.name
+                            hero.health += monster.reward[0]
+                            hero.power += monster.reward[1]
+                            print "You power has increased to %s and your health to %s" % (hero.power, hero.health)
+                            del monsters[monsters.index(monster)]
+                            wait()
+                            wait()
+                            break
+ 
+
                 mushroom = random.randint(0,1)
                 #print "You have %d health and %d power." % (hero.health, hero.power)
                 #print "The %s has %d health and %d power.\n" % (monster.name, monster.health, monster.power)
-                print "What do you want to do?"
+                print "What do you want to do now?"
                 print "1. fight %s" % monster.name
                 if mushroom == True:
                     print "2. flee"

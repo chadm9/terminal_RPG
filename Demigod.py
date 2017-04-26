@@ -1,8 +1,8 @@
 from Character import Character
 
-class Hero(Character):
+class Demigod(Character):
     def __init__(self, name = 'Nameless'):
-        super(Hero, self).__init__(name, 50, 20)
+        super(Demigod, self).__init__(name, 50, 20)
       #  self.name = name
      #   self.health = 10
      #   self.power = 5
