@@ -185,8 +185,8 @@ def main():
                 if monster_acts_1st:
                     print '%s is first to act' % (monster.name)
                     wait()
-                    monster_attacks = random.randint(0,1)
-                    if monster_attacks:
+                    monster_attacks = random.randint(1,3)
+                    if monster_attacks > 1:
                         print "%s attacks" % (monster.name)
                         hero.health -= attack(monster, hero)
                         print "You have %d health remaining." % (hero.health)
@@ -268,7 +268,7 @@ def main():
                     print "You have gone into a rage.  Your power has increased!"
                     hero.power += 5
 
-    print "You have slain all foes.  You are victorius!"
+    print "%s you have slain all foes.  You are victorius!" % (hero.name)
     printVictory()
 
 main()
