@@ -2,12 +2,12 @@ from Character import Character
 
 class Hero(Character):
     def __init__(self, name = 'Nameless'):
-        super(Hero, self).__init__(name, 10, 5)
+        super(Hero, self).__init__(name, 7, 3)
       #  self.name = name
      #   self.health = 10
      #   self.power = 5
-        self.max_health = 50 
-	self.magic_user = False
+        self.max_health = 30 
+        self.magic_user = True
         self.can_miss = True
       #  self.xp = 0
       #  self.level = 1

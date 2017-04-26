@@ -4,6 +4,7 @@ class Monster(object):
         self.power = power
         self.health = health
         self.reward = reward
+        self.can_miss = True
 
     def takeDamage(self, damage):
         self.health -= damage

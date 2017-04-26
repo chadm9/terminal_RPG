@@ -152,7 +152,11 @@ def wait():
     print '.\n'
 
 def attack(attacker, defender):
-    outcome = random.randint(0,2)
+    if attacker.can_miss:
+        bound = 0
+    else:
+        bound = 1
+    outcome = random.randint(bound,2)
     if outcome == 0:
         print "%s dodged %s's attack" % (defender.name, attacker.name)
     elif outcome == 1:
