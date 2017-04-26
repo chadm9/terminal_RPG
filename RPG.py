@@ -191,7 +191,7 @@ def main():
                         hero.health -= attack(monster, hero)
                         print "You have %d health remaining." % (hero.health)
                         if not hero.isAlive():
-                            print "                        Y O U  A R E  D E A D"
+                            print "                    Y O U  A R E  D E A D"
                             printDeath()
                             exit()
                     else:
@@ -234,7 +234,7 @@ def main():
                     wait()
                     hero.eatMushroom()
                     if not hero.isAlive():
-                        print "                        Y O U  A R E  D E A D"
+                        print "                    Y O U  A R E  D E A D"
                         printDeath()
                         exit()
 
@@ -254,7 +254,7 @@ def main():
                     hero.health -= attack(monster, hero)
                     print "You have %d health remaining." % (hero.health)
                     if not hero.isAlive():
-                        print "                        Y O U  A R E  D E A D"
+                        print "                    Y O U  A R E  D E A D"
                         printDeath()
                         exit()
                 elif monster.health > 0:
