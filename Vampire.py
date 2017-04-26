@@ -1,16 +1,13 @@
-class Vampire(object):
+from Monster import Monster
+
+class Vampire(Monster):
     def __init__(self):
+        super(Vampire, self).__init__("Vampire")
         self.health = 12
         self.power = 5
-        self.name = "Vampire"
         self.xp_value = 10
         self.reward = (5, 3)
 
-    def takeDamage(self, damage):
-        self.health -= damage
-
-    def isAlive(self):
-        return self.health > 0
 
     def display(self):
         print """                                                                
