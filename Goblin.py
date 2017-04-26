@@ -1,9 +1,10 @@
 class Goblin(object):
     def __init__(self):
-        self.health = 6
+        self.health = 5
         self.power = 2
         self.name = 'Goblin'
         self.xp_value = 5
+        self.reward = (4, 2)
 
     def takeDamage(self, damage):
         self.health -= damage

@@ -4,6 +4,7 @@ class Vampire(object):
         self.power = 5
         self.name = "Vampire"
         self.xp_value = 10
+        self.reward = (5, 3)
 
     def takeDamage(self, damage):
         self.health -= damage

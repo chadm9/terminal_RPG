@@ -1,6 +1,7 @@
 from Hero import Hero
 from Goblin import Goblin
 from Vampire import Vampire
+from Dragon import Dragon
 import random
 import time
 
@@ -10,11 +11,13 @@ def generateFoes(hero):
     monsters = []
     number_of_monsters = int(raw_input("Welcome %s, how many monsters will you fight?\n> " % (hero.name)))
     for i in range(number_of_monsters):
-        random_int = random.randint(1, 2)
+        random_int = random.randint(1, 3)
         if random_int == 1:
             monsters.append(Goblin())
         elif random_int == 2:
             monsters.append(Vampire())
+        elif random_int ==3:
+            monsters.append(Dragon())
 
     return monsters
 
@@ -170,6 +173,8 @@ def main():
 
         for monster in monsters:
             print "\n%s, you have encountered a %s" % (hero.name, monster.name)
+            print "You have %d health and %d power." % (hero.health, hero.power)
+            print "The %s has %d health and %d power.\n" % (monster.name, monster.health, monster.power)
             monster.display()
 
 
@@ -184,6 +189,7 @@ def main():
                     if monster_attacks:
                         print "%s attacks" % (monster.name)
                         hero.health -= attack(monster, hero)
+                        print "You have %d health remaining." % (hero.health)
                         if not hero.isAlive():
                             print "                        Y O U  A R E  D E A D"
                             printDeath()
@@ -197,8 +203,8 @@ def main():
                     print "%s is first to act" % (hero.name)
 
                 mushroom = random.randint(0,1)
-                print "You have %d health and %d power." % (hero.health, hero.power)
-                print "The %s has %d health and %d power.\n" % (monster.name, monster.health, monster.power)
+                #print "You have %d health and %d power." % (hero.health, hero.power)
+                #print "The %s has %d health and %d power.\n" % (monster.name, monster.health, monster.power)
                 print "What do you want to do?"
                 print "1. fight %s" % monster.name
                 if mushroom == True:
@@ -214,10 +220,11 @@ def main():
                     wait()
                     monster.health -= attack(hero, monster)
                     print "%s has %s health remaining." % (monster.name, monster.health)
+                    wait()
                     if monster.health <= 0:
                         print "You have defeated the %s!" % monster.name
-                        hero.health += 2
-			hero.power += 1 
+                        hero.health += monster.reward[0] 
+			hero.power += monster.reward[1] 
                         print "You power has increased to %s and your health to %s" % (hero.power, hero.health)
                         del monsters[monsters.index(monster)]
                         wait()
@@ -235,22 +242,25 @@ def main():
                     print 'Fleeing...'
                     wait()
                     print "You ran away..."
+                    wait()
                     break
 
                 else:
                     print "Invalid input %s" % user_input
 
-                if monster.health > 0 and random.randint(0,1):
+                if monster.health > 0 and not random.randint(0,3):
                     print "%s attacking..." % (monster.name)
                     wait()
                     hero.health -= attack(monster, hero)
+                    print "You have %d health remaining." % (hero.health)
                     if not hero.isAlive():
                         print "                        Y O U  A R E  D E A D"
                         printDeath()
                         exit()
-                else:
+                elif monster.health > 0:
                     wait()
 		    print "%s ran away" % (monster.name)
+                    wait()
 		    break
 
                 if hero.isAlive() and hero.health < 5:
