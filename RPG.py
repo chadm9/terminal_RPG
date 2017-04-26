@@ -1,7 +1,7 @@
 from Hero import Hero
-from Goblin import Goblin
 from Vampire import Vampire
 from Dragon import Dragon
+from Goblin import Goblin
 import random
 import time
 
@@ -25,7 +25,7 @@ def generateFoes(hero):
 def startGame():
 
     print '************************************************'
-    print '*              H E R O Q U E S T               * '
+    print '*           M O N S T E R  Q U E S T           * '
     print '************************************************'
     print """                                .-.
                                {{@}}
@@ -59,7 +59,7 @@ def printVictory():
                      .-'`-.
                     / | |  \\
                    /  | |   \\
-                  |___|_|__  |                 K I N G   O F   T H E   M O N S T E R S
+                  |___|_|__  |                T H E  R E A L  M O N S T E R  IS  Y O U . . .  
                   ||<o>| <o>`|
                   ||   J_   )|
                   `|`-'__`-'|/
@@ -191,7 +191,7 @@ def main():
                         hero.health -= attack(monster, hero)
                         print "You have %d health remaining." % (hero.health)
                         if not hero.isAlive():
-                            print "                    Y O U  A R E  D E A D"
+                            print "                     Y O U  A R E  D E A D"
                             printDeath()
                             exit()
                     else:
@@ -228,13 +228,14 @@ def main():
                         print "You power has increased to %s and your health to %s" % (hero.power, hero.health)
                         del monsters[monsters.index(monster)]
                         wait()
+                        wait()
 
                 elif user_input == "3" and mushroom == True:
                     print 'Eating Mushroom...'
                     wait()
                     hero.eatMushroom()
                     if not hero.isAlive():
-                        print "                    Y O U  A R E  D E A D"
+                        print "                     Y O U  A R E  D E A D"
                         printDeath()
                         exit()
 
@@ -254,7 +255,7 @@ def main():
                     hero.health -= attack(monster, hero)
                     print "You have %d health remaining." % (hero.health)
                     if not hero.isAlive():
-                        print "                    Y O U  A R E  D E A D"
+                        print "                     Y O U  A R E  D E A D"
                         printDeath()
                         exit()
                 elif monster.health > 0:

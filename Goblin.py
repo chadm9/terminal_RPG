@@ -1,16 +1,13 @@
-class Goblin(object):
+from Monster import Monster
+class Goblin(Monster):
     def __init__(self):
-        self.health = 5
-        self.power = 2
-        self.name = 'Goblin'
-        self.xp_value = 5
-        self.reward = (4, 2)
+        super(Goblin, self).__init__("Goblin", 2, 5, (3, 1))
+        #self.health = 5
+       # self.power = 2
+        #self.name = 'Goblin'
+        #self.xp_value = 5
+        #self.reward = (4, 2)
 
-    def takeDamage(self, damage):
-        self.health -= damage
-
-    def isAlive(self):
-        return self.health > 0
 
     def display(self):
         print '''

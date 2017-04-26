@@ -1,16 +1,13 @@
-class Dragon(object):
+from Monster import Monster
+class Dragon(Monster):
     def __init__(self):
-        self.health = 15
-        self.power = 7
-        self.name = "Dragon"
-        self.xp_value = 10
-        self.reward = (6, 4)
+	super(Dragon, self).__init__("Dragon", 7, 15, (6, 4))
+        #self.health = 15
+        #self.power = 7
+        #self.name = "Dragon"
+        #self.xp_value = 10
+        #self.reward = (6, 4)
 
-    def takeDamage(self, damage):
-        self.health -= damage
-
-    def isAlive(self):
-        return self.health > 0
 
     def display(self):
         print """                                                 /===-_---~~~~~~~~~------____
