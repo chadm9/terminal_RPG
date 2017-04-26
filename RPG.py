@@ -249,7 +249,7 @@ def main():
                 else:
                     print "Invalid input %s" % user_input
 
-                if monster.health > 0 and not random.randint(0,3):
+                if monster.health > 0 and random.randint(1,3) > 1:
                     print "%s attacking..." % (monster.name)
                     wait()
                     hero.health -= attack(monster, hero)

@@ -1,7 +1,7 @@
 from Monster import Monster
 class Dragon(Monster):
     def __init__(self):
-	super(Dragon, self).__init__("Dragon", 7, 15, (6, 4))
+	super(Dragon, self).__init__("Dragon", 8, 15, (6, 4))
         #self.health = 15
         #self.power = 7
         #self.name = "Dragon"
