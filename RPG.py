@@ -250,9 +250,8 @@ def heroActs(hero, monster):
     print "What do you want to do now?"
     print "1. fight" 
     print "2. flee"
+    print "3. check inventory"
 
-    if mushroom == True:
-        print "3. eat a wild mushroom"
     if hero.magic_user == True:
         print "4. cast spell"
     print "> ",
@@ -264,10 +263,8 @@ def heroActs(hero, monster):
         monster.health -= attack(hero, monster)
         print "%s has %s health remaining." % (monster.name, monster.health)
         wait() 
-    elif user_input == "3" and mushroom == True:
-        print 'Eating Mushroom...'
-        wait()
-        hero.eatMushroom()
+    elif user_input == "3":
+        checkInventory(hero) 
 
     elif user_input == "2":
         print "You ran away..."
@@ -280,14 +277,145 @@ def heroActs(hero, monster):
     else:
         print "Invalid input. The opportunity for action has been lost..."
 
+def generateLocation():
+    location = random.randint(1,2)
+    if location == 1:
+        print """           ~'`_ \/,_. \_
+          / ,"_>@`,__`~.)             |           .
+          | |  @@@@'  ",! .           .          '
+          |/   ^^@     .!  \          |         /
+          `' .^^^     ,'    '         |        .             .
+           .^^^   .          \                /          .
+          .^^^       '  .     \       |      /       . '
+.,.,.     ^^^             ` .   .,+~'`^`'~+,.     , '
+&&&&&&,  ,^^^^.  . ._ ..__ _  .'             '. '_ __ ____ __ _ .. .  .
+%%%%%%%%%^^^^^^%%&&;_,.-=~'`^`'~=-.,__,.-=~'`^`'~=-.,__,.-=~'`^`'~=-.,
+&&&&&%%%%%%%%%%%%%%%%%%&&;,.-=~'`^`'~=-.,__,.-=~'`^`'~=-.,__,.-=~'`^`'~=
+%%%%%&&&&&&&&&&&%%%%&&&_,.;^`'~=-.,__,.-=~'`^`'~=-.,__,.-=~'`^`'~=-.,__,
+%%%%%%%%%&&&&&&&&&-=~'`^`'~=-.,__,.-=~'`^`'~=-.,__,.-==--^'~=-.,__,.-=~'
+##mjy#####*"'
+_,.-=~'`^`'~=-.,__,.-=~'`^`'~=-.,__,.-=~'`^`'~=-.,.-=~'`^`'~=-.,__,.-=~'
+
+~`'^`'~=-.,__,.-=~'`^`'~=-.,__,.-=~'`^`'~=-.,__,.-=~'`^`'~=-.,__,.-=~'`"""
+        print "You find yourself on a warm beach."
+
+    elif location == 2:
+        print """                                  _
+                        .-.      / \\        _
+            ^^         /   \\    /^./\\__   _/ \\
+          _        .--'\\/\\_ \\__/.      \\ /    \\  ^^  ___
+         / \\_    _/ ^      \\/  __  :'   /\\/\\  /\\  __/   \\
+        /    \\  /    .'   _/  /  \\   ^ /    \\/  \\/ .`'\\_/\\
+       /\\/\\  /\\/ :' __  ^/  ^/    `--./.'  ^  `-.\\ _    _:\\ _
+      /    \\/  \\  _/  \\-' __/.' ^ _   \\_   .'\\   _/ \\ .  __/ \\
+    /\\  .-   `. \\/     \\ / -.   _/ \\ -. `_/   \\ /    `._/  ^  \\
+   /  `-.__ ^   / .-'.--'    . /    `--./ .-'  `-.  `-. `.  -  `.
+ @/        `.  / /      `-.   /  .-'   / .   .'   \\    \\  \\  .-  \\%
+ @(88%@)@%% @)&@&(88&@.-_=_-=_-=_-=_-=_.8@% &@&&8(8%@%8)(8@%8 8%@)%
+ @88:::&(&8&&8::JGS:&`.~-_~~-~~_~-~_~-~~=.'@(&%::::%@8&8)::&#@8::::
+ `::::::8%@@%:::::@%&8:`.=~~-.~~-.~~=..~'8::::::::&@8:::::&8::::::'
+  `::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::' """
+        print "You are on a mountainous terrain"
+
+def generateEvent(wandering):
+    event = random.randint(1, 21)
+    if event <= 7:
+        print "You sense an ominous presence."
+    elif event > 7 and event <= 14:
+        print "You see nothing on the horizon."
+    elif event == 15:
+        print "An elixir of healing is hidden under some brush."
+    elif event == 16:
+        print "A root of power is planted at your feet."
+    else:
+        print "Wild mushrooms are growing in the area."
+    return event 
+        
+def getReaction(event, hero):
+    print "Enter an action.\n1. press onward\n2. check inventory"
+    if event > 14:
+        print "3. pick up item"
+    selection = raw_input("> ") 
+
+    if event > 14 and selection == "3":
+        if event == 15:
+            hero.elixir_count += 1
+            print "You picked up the elixir."
+            wait()
+        if event == 16:
+            hero.root_count += 1
+            print "You picked up the root."
+            wait()
+        if event > 16:
+            print "You picked up a mushroom."
+            wait()
+            hero.mushroom_count += 1
+
+    if selection == "2":
+        checkInventory(hero)
+    wait()
+
+def checkInventory(hero):
+    print "\n%s elixirs of life" % (hero.elixir_count)
+    print "%s roots of power" % (hero.root_count)
+    print "%s wild mushrooms\n" % (hero.mushroom_count)
+    print "1. use elixir"
+    print "2. use root"
+    print "3. use mushroom"
+    print "4. exit inventory\n"
+
+    selection = raw_input("What do you want ot do?\n> ")
+
+    if selection == "1":
+        if hero.elixir_count > 0:
+            hero.health += 3
+            hero.elixir_count -= 1
+            print "You used an elixir, your health is increased to %s" % (hero.health)
+        else:
+            print "You have no elixirs..."
+
+
+    if selection == "2":                       
+        if hero.root_count > 0:
+            hero.power += 2
+            hero.root_count -= 1
+            print "You used a root, your health is increased to %s" % (hero.power)
+        else:
+            print "You have no roots.."
+
+    if selection == "3":                       
+        if hero.mushroom_count > 0:
+            hero.eatMushroom() 
+            hero.mushroom_count -= 1
+        else:
+            print "You have no elixirs..."
+ 
+
 def main():
 
     hero = initializeHero()          #Select the hero's character and name.
     monsters = generateFoes(hero)    #Randomly initialize a user selected number of monsters.
-
+    
     while len(monsters) > 0:   #While there are monsters to fight.
 
+#        wandering = True
+ #       while wandering:
+ #           generateLocation()
+ #           event = generateEvent(wandering)
+ #           getReaction(event, hero)
+ #           if event <= 7:
+ #               break
+
         for monster in monsters:
+
+            wandering = True
+            while wandering:
+                generateLocation()
+                event = generateEvent(wandering)
+                getReaction(event, hero)
+                if event <= 7:
+                    break
+
             displayMatchup(hero, monster)       #Print the hero's and monster's stats for comparison
 
             while monster.isAlive() and hero.isAlive():

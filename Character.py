@@ -4,6 +4,9 @@ class Character(object):
         self.name = name
         self.health = health 
         self.power = power 
+        self.mushroom_count = 0
+        self.elixir_count = 0
+        self.root_count = 0
 
     def isAlive(self):
         return self.health > 0
