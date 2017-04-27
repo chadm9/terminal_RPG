@@ -2,7 +2,7 @@ from Character import Character
 
 class Wizard(Character):
     def __init__(self, name = 'Nameless'):
-        super(Wizard, self).__init__(name, 7, 3)
+        super(Wizard, self).__init__(name, 8, 2)
       #  self.name = name
      #   self.health = 10
      #   self.power = 5

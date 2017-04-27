@@ -10,7 +10,7 @@ class Vampire(Monster):
 
 
     def display(self):
-        print """                                                                
+        print """
  \\\\'.                                                           .'/
   ),\                                                         /,( 
  /__\\\\'.                                                     .'/__\\
