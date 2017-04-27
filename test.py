@@ -58,7 +58,7 @@ def initializeHero():
     print '************************************************'
     wait()
     name = raw_input("What is thy name brave wanderer?\n> ")
-    selection = raw_input("""What art though?
+    selection = raw_input("""What art thou?
 1. A Warrior 
 2. A Wizard
 3. A Demigod
@@ -278,7 +278,7 @@ def heroActs(hero, monster):
         print "Invalid input. The opportunity for action has been lost..."
 
 def generateLocation():
-    location = random.randint(1,2)
+    location = random.randint(1,4)
     if location == 1:
         print """           ~'`_ \/,_. \_
           / ,"_>@`,__`~.)             |           .
@@ -316,6 +316,50 @@ _,.-=~'`^`'~=-.,__,.-=~'`^`'~=-.,__,.-=~'`^`'~=-.,.-=~'`^`'~=-.,__,.-=~'
  `::::::8%@@%:::::@%&8:`.=~~-.~~-.~~=..~'8::::::::&@8:::::&8::::::'
   `::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::' """
         print "You are on a mountainous terrain"
+
+    elif location == 3:
+        print """			     .    _    +     .  ______   .          .     '      .            '+
+  (      /|\      _   _|      \\___   .   +    '    .         *
+    /\  ||||| .  | | |   | |      |       .    '                    .    '
+ __||||_|||||____| |_|_____________\\________________________________________
+ . |||| |||||  /\   _____      _____  .   .       .             .       .
+  . \\|`-'|||| ||||    __________            .
+     \\__ |||| ||||      .          .     .     .        -            .   .
+  __    ||||`-'|||  .       .    __________
+ .    . |||| ___/  ___________             .
+ _   ___|||||__  _           .          _
+      _ `---'    .   .    .   _   .   .    .
+ _  ^      .  -    .    -    .       -    .    .  .      -   .     .    -
+                                                   _   __ """
+        print "You have stumbled across a desert, a barren place."
+
+    elif location == 4:
+        print '''          <|
+           A             
+          /.\       
+         [""M#      
+      A   | #              
+     /.\ [""M#             
+    [""M# | #  U"U#U                 
+     | #  | #  \ .:/    
+     | #  | #___| #     
+     | "--'     .-"     
+   |"-"-"-"-"-#-#-##    
+   |     # ## ######     
+    \       .::::'/     
+     \      ::::'/      
+   :8a|    # # ##      
+   ::88a      ###       
+  ::::888a  8a ##::.    
+  ::::::888a88a[]::::
+ :::::::::SUNDOGa8a::::. ..              
+ :::::8::::888:Y8888:::::::::...      
+::':::88::::888::Y88a______________________________________________________
+:: ::::88a::::88a:Y88a                                  __---__-- __
+' .: ::Y88a:::::8a:Y88a                            __----_-- -------_-__
+  :' ::::8P::::::::::88aa.                   _ _- --  --_ --- __  --- __--
+.::  :::::::::::::::::::Y88as88a...s88aa '''
+        print "An abandoned kingdom lies before you.  The beasts have taken everything."
 
 def generateEvent(wandering):
     event = random.randint(1, 21)
@@ -356,10 +400,13 @@ def getReaction(event, hero):
     wait()
 
 def checkInventory(hero):
+    print "***************"
+    print "*  INVENTORY  *"
+    print "***************"
     print "\n%s elixirs of life" % (hero.elixir_count)
     print "%s roots of power" % (hero.root_count)
     print "%s wild mushrooms\n" % (hero.mushroom_count)
-    print "1. use elixir"
+    print "Make a selection:\n1. use elixir"
     print "2. use root"
     print "3. use mushroom"
     print "4. exit inventory\n"
@@ -379,7 +426,7 @@ def checkInventory(hero):
         if hero.root_count > 0:
             hero.power += 2
             hero.root_count -= 1
-            print "You used a root, your health is increased to %s" % (hero.power)
+            print "You used a root, your power is increased to %s" % (hero.power)
         else:
             print "You have no roots.."
 
@@ -397,14 +444,6 @@ def main():
     monsters = generateFoes(hero)    #Randomly initialize a user selected number of monsters.
     
     while len(monsters) > 0:   #While there are monsters to fight.
-
-#        wandering = True
- #       while wandering:
- #           generateLocation()
- #           event = generateEvent(wandering)
- #           getReaction(event, hero)
- #           if event <= 7:
- #               break
 
         for monster in monsters:
 
